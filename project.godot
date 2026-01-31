@@ -24,6 +24,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+map="amalgamation of all maps"
+
 [input]
 
 move_up={
