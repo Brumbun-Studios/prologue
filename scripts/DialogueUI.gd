@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal dialogue_finished
+
 @onready var content_label = %DialogueContent
 @onready var name_label = %SpeakerName
 @onready var choice_container = %ChoiceContainer
@@ -43,4 +45,7 @@ func _create_choice_buttons(choices: Array):
 
 func _on_choice_pressed(index: int):
 	choice_selected.emit(index)
+	# This closes the UI and tells the player they can move again
+	hide() 
+	dialogue_finished.emit()
 	# You can either hide here or wait for the next data from the NPC

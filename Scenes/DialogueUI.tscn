@@ -8,25 +8,29 @@ anchor_right = 0.045
 anchor_bottom = 0.096
 offset_left = -9.0
 offset_top = -7.0
-offset_right = 11.199999
-offset_bottom = 5.4399986
+offset_right = 197.2
+offset_bottom = 85.44
 
 [node name="DialogueContent" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
-offset_right = 54.0
-offset_bottom = 24.0
-text = "Hello!"
+offset_left = 22.0
+offset_top = 15.0
+offset_right = 579.0
+offset_bottom = 165.0
 
 [node name="SpeakerName" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 10.0
+offset_top = 168.0
+offset_right = 238.0
+offset_bottom = 208.0
 
 [node name="ChoiceContainer" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
 anchors_preset = -1
 anchor_right = 0.026
 anchor_bottom = 0.056
-offset_top = -4.0
-offset_right = 23.36
-offset_bottom = 15.84
+offset_left = 10.0
+offset_top = 199.0
+offset_right = 581.36
+offset_bottom = 298.84

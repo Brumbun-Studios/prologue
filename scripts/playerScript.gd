@@ -21,16 +21,26 @@ func check_for_interactables():
 			start_dialogue(npc)
 
 func start_dialogue(npc):
-	print("Talking to: ", npc.name)
 	# 1. Freeze the Player
 	velocity = Vector2.ZERO
 	set_physics_process(false) 
 	
-	# 2. Safely Freeze the NPC
-	if "is_wandering" in npc:
+	# 2. Freeze the NPC and trigger THEIR conversation logic
+	if npc.has_method("interact"):
 		npc.is_wandering = false
+		npc.interact() # This triggers the "Selamat siang, Le" code in wander.gd
 	
-	npc.set("is_wandering", false)
+	# 3. Listen for the UI to close so we can unfreeze
+	var ui = get_tree().get_first_node_in_group("dialog_ui")
+	if ui:
+		# Use the signal name exactly as declared in the UI script
+		if not ui.dialogue_finished.is_connected(_on_dialogue_finished):
+			ui.dialogue_finished.connect(_on_dialogue_finished.bind(npc), CONNECT_ONE_SHOT)
+
+func _on_dialogue_finished(npc):
+	set_physics_process(true)
+	if npc and "is_wandering" in npc:
+		npc.is_wandering = true
 
 func _ready():
 	tilemap = get_tree().get_first_node_in_group("map")
