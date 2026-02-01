@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dhk4nkh36o2go"]
+
+[node name="DialogueUI" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.045
+anchor_bottom = 0.096
+offset_left = -9.0
+offset_top = -7.0
+offset_right = 11.199999
+offset_bottom = 5.4399986
+
+[node name="DialogueContent" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_right = 54.0
+offset_bottom = 24.0
+text = "Hello!"
+
+[node name="SpeakerName" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChoiceContainer" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.026
+anchor_bottom = 0.056
+offset_top = -4.0
+offset_right = 23.36
+offset_bottom = 15.84

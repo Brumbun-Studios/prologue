@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd7pm1b53a1g6"]
+[gd_scene load_steps=6 format=3 uid="uid://cd7pm1b53a1g6"]
 
 [ext_resource type="PackedScene" uid="uid://bkcjegedfadci" path="res://Scenes/level_001.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://d0whb0pkkty8s" path="res://Scenes/Player.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://b1hexjrxd0oym" path="res://Scenes/npc.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dhk4nkh36o2go" path="res://Scenes/DialogueUI.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://cnmcrh1tstm3n" path="res://scripts/DialogueUI.gd" id="6_6bp64"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Level001" parent="." instance=ExtResource("1_bo1nx")]
 
-[node name="Node2D" parent="." instance=ExtResource("2_8gbba")]
+[node name="Player" parent="." instance=ExtResource("2_8gbba")]
 position = Vector2(57, 62)
+
+[node name="NPC" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(-19, 75)
+
+[node name="DialogueUI" parent="." groups=["dialog_ui", "interactable", "map"] instance=ExtResource("4_jjvhh")]
+script = ExtResource("6_6bp64")

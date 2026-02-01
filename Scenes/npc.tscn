@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0whb0pkkty8s"]
+[gd_scene load_steps=11 format=3 uid="uid://b1hexjrxd0oym"]
 
-[ext_resource type="Script" uid="uid://bkda7b18g6j51" path="res://scripts/playerScript.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://c4odii2dh1jyg" path="res://assets/Player.png" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://c4odii2dh1jyg" path="res://assets/Player.png" id="1_acqhf"]
+[ext_resource type="Script" uid="uid://cnhrw5ditdjb6" path="res://scripts/wander.gd" id="1_xxsvc"]
 
 [sub_resource type="Animation" id="Animation_kne1u"]
 length = 0.001
@@ -94,15 +94,16 @@ _data = {
 &"walk_up": SubResource("Animation_e80uo")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rpqav"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xxsvc"]
 radius = 4.0
 height = 16.0
 
-[node name="Node2D" type="CharacterBody2D"]
-script = ExtResource("1_kyqiw")
+[node name="NPC" type="CharacterBody2D" groups=["interactable"]]
+script = ExtResource("1_xxsvc")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["map"]]
-texture = ExtResource("1_xhfnw")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("1_acqhf")
 hframes = 6
 vframes = 10
 frame = 18
@@ -113,8 +114,12 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 1)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_rpqav")
+shape = SubResource("CapsuleShape2D_xxsvc")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(2.09375, 1)
+polygon = PackedVector2Array(0, 0, 10, -10, -10, -10, -10, 7, 10, 7, 10, -3.056902, 10, -10)
