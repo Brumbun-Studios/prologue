@@ -2,35 +2,38 @@
 
 [node name="DialogueUI" type="CanvasLayer"]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = -1
-anchor_right = 0.045
-anchor_bottom = 0.096
-offset_left = -9.0
-offset_top = -7.0
-offset_right = 197.2
-offset_bottom = 85.44
-
 [node name="DialogueContent" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
-offset_left = 22.0
-offset_top = 15.0
-offset_right = 579.0
-offset_bottom = 165.0
+offset_left = 35.0
+offset_top = 23.0
+offset_right = 588.0
+offset_bottom = 160.0
 
 [node name="SpeakerName" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
-offset_left = 10.0
+offset_left = 27.0
 offset_top = 168.0
-offset_right = 238.0
+offset_right = 321.0
 offset_bottom = 208.0
 
-[node name="ChoiceContainer" type="RichTextLabel" parent="."]
+[node name="ChoiceContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 anchors_preset = -1
 anchor_right = 0.026
 anchor_bottom = 0.056
-offset_left = 10.0
+offset_left = 25.0
 offset_top = 199.0
-offset_right = 581.36
-offset_bottom = 298.84
+offset_right = 600.36
+offset_bottom = 318.84
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -7.0
+offset_right = 12.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2

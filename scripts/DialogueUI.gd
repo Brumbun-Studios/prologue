@@ -30,7 +30,18 @@ func start_conversation(speaker_name: String, text: String, choices: Array = [])
 	
 	# Only show choices once the text is fully typed
 	await tween.finished
-	_create_choice_buttons(choices)
+	
+	if choices.size() > 0:
+		_create_choice_buttons(choices)
+	else:
+		# No choices = end of conversation, auto-close after a moment
+		await get_tree().create_timer(1.5).timeout
+		hide()
+		dialogue_finished.emit()
+
+func _on_choice_pressed(index: int):
+	choice_selected.emit(index)
+	# Don't hide or emit dialogue_finished here anymore
 
 func _create_choice_buttons(choices: Array):
 	for i in range(choices.size()):
@@ -42,10 +53,3 @@ func _create_choice_buttons(choices: Array):
 		
 		if i == 0: 
 			btn.grab_focus() # Allows keyboard/controller selection
-
-func _on_choice_pressed(index: int):
-	choice_selected.emit(index)
-	# This closes the UI and tells the player they can move again
-	hide() 
-	dialogue_finished.emit()
-	# You can either hide here or wait for the next data from the NPC

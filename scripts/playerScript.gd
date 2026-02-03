@@ -5,39 +5,40 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @export var tilemap: TileMapLayer
 
+var is_talking: bool = false
+
 func _input(event):
-	if event.is_action_pressed("ui_accept"): # "ui_accept" is usually Space/Enter
+	# FIX: Only allow interaction if we are NOT already talking
+	if event.is_action_pressed("ui_accept") and not is_talking: 
 		check_for_interactables()
 
 func check_for_interactables():
-	# Find all Area2Ds overlapping the player
-	# Better yet, use a dedicated RayCast2D pointing in the direction the player faces
 	var interactables = get_tree().get_nodes_in_group("interactable")
 	for npc in interactables:
-		# Skip if not a Node2D (avoids UI elements like CanvasLayer)
 		if not npc is Node2D:
 			continue
 		if global_position.distance_to(npc.global_position) < 50:
 			start_dialogue(npc)
+			return # Stop searching once we find one NPC to talk to
 
 func start_dialogue(npc):
-	# 1. Freeze the Player
+	is_talking = true # Lock the gate
+	
 	velocity = Vector2.ZERO
 	set_physics_process(false) 
 	
-	# 2. Freeze the NPC and trigger THEIR conversation logic
 	if npc.has_method("interact"):
 		npc.is_wandering = false
-		npc.interact() # This triggers the "Selamat siang, Le" code in wander.gd
+		npc.interact() 
 	
-	# 3. Listen for the UI to close so we can unfreeze
 	var ui = get_tree().get_first_node_in_group("dialog_ui")
 	if ui:
-		# Use the signal name exactly as declared in the UI script
+		# Use CONNECT_ONE_SHOT so it cleans itself up
 		if not ui.dialogue_finished.is_connected(_on_dialogue_finished):
 			ui.dialogue_finished.connect(_on_dialogue_finished.bind(npc), CONNECT_ONE_SHOT)
 
 func _on_dialogue_finished(npc):
+	is_talking = false # FIX: Unlock the gate so you can talk again later
 	set_physics_process(true)
 	if npc and "is_wandering" in npc:
 		npc.is_wandering = true

@@ -1,15 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd7pm1b53a1g6"]
+[gd_scene load_steps=10 format=3 uid="uid://cd7pm1b53a1g6"]
 
 [ext_resource type="PackedScene" uid="uid://bkcjegedfadci" path="res://Scenes/level_001.tscn" id="1_bo1nx"]
+[ext_resource type="Script" uid="uid://mfsvji2mnovf" path="res://scripts/Main.gd" id="1_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://d0whb0pkkty8s" path="res://Scenes/Player.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://b1hexjrxd0oym" path="res://Scenes/npc.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://58nx7tw01dq6" path="res://Scenes/Battle.tscn" id="4_hptm8"]
 [ext_resource type="PackedScene" uid="uid://dhk4nkh36o2go" path="res://Scenes/DialogueUI.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://cnmcrh1tstm3n" path="res://scripts/DialogueUI.gd" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://cxduu5km4nji6" path="res://Scenes/slime.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://dasso4sqxmpup" path="res://Scenes/badboyslime.tscn" id="7_6bp64"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ynf5e")
 
 [node name="DialogueUI" parent="." groups=["dialog_ui"] instance=ExtResource("4_jjvhh")]
 script = ExtResource("6_6bp64")
+
+[node name="BattleUI" parent="." groups=["battle_screen"] instance=ExtResource("4_hptm8")]
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -20,3 +27,12 @@ position = Vector2(-19, 75)
 
 [node name="Player" parent="Node2D" instance=ExtResource("2_8gbba")]
 position = Vector2(57, 62)
+
+[node name="NPC2" parent="Node2D" instance=ExtResource("3_8gbba")]
+position = Vector2(132, 9)
+
+[node name="Slime" parent="Node2D" instance=ExtResource("6_21xkr")]
+position = Vector2(132, 80)
+
+[node name="badSlime" parent="Node2D" instance=ExtResource("7_6bp64")]
+position = Vector2(-78, 18)

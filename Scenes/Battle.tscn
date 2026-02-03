@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://58nx7tw01dq6"]
+
+[ext_resource type="Script" uid="uid://dwlcoithier7a" path="res://scripts/Battle.gd" id="1_wvl2i"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wvl2i"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_wvl2i"]
+
+[node name="battleRoot" type="CanvasLayer" node_paths=PackedStringArray("player_marker", "enemy_marker")]
+script = ExtResource("1_wvl2i")
+player_marker = NodePath("player")
+enemy_marker = NodePath("enemy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 640.0
+offset_bottom = 362.0
+texture = SubResource("CanvasTexture_wvl2i")
+
+[node name="EnemyHP" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 352.0
+offset_top = 38.0
+offset_right = 455.0
+offset_bottom = 65.0
+
+[node name="PlayerHP" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 176.0
+offset_top = 66.0
+offset_right = 281.0
+offset_bottom = 93.0
+
+[node name="player" type="Marker2D" parent="."]
+position = Vector2(148.00002, 171.99998)
+scale = Vector2(10, 10)
+
+[node name="enemy" type="Marker2D" parent="."]
+position = Vector2(490.99997, 131)
+scale = Vector2(10, 10)
+
+[node name="NinePatchRect" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 266.0
+offset_right = 586.0
+offset_bottom = 338.0
+
+[node name="VBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_right = 569.0
+offset_bottom = 73.0
+alignment = 1
+
+[node name="AttackButton" type="Button" parent="NinePatchRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Attack"
+
+[node name="SkillButton" type="Button" parent="NinePatchRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Skill"
+
+[node name="RunButton" type="Button" parent="NinePatchRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Run
+"
+icon = SubResource("ImageTexture_wvl2i")
