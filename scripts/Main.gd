@@ -1,8 +1,19 @@
 extends Node2D # Main is usually a Node2D
 
+@onready var main_menu = $MainMenu
 @onready var world = $Node2D # Your overworld container
 @onready var battle_ui = $BattleUI # The CanvasLayer child
+func _ready():
+	# Start the game with the overworld hidden
+	world.hide()
+	
+	# Connect the play signal
+	main_menu.play_pressed.connect(_start_game)
 
+func _start_game():
+	world.show()
+	# Optional: Play a "Game Start" sound or fade-in transition
+	
 func enter_battle(enemy_node):
 	# 1. Freeze the overworld
 	world.hide()
