@@ -1,27 +1,86 @@
 extends CanvasLayer
 signal battle_finished
+
 @export var player_marker: Marker2D
 @export var enemy_marker: Marker2D
+
 @onready var player_hp_bar = %PlayerHP
 @onready var enemy_hp_bar = %EnemyHP
 @onready var action_menu = %NinePatchRect
+@onready var skill_box = %SkillBox # Your new subbox
+
+# Main Buttons
 @onready var attack_button = %AttackButton
 @onready var skill_button = %SkillButton
 @onready var run_button = %RunButton
+
+# Skill Buttons
+@onready var fire_btn = %FireButton
+@onready var water_btn = %WaterButton
+@onready var earth_btn = %EarthButton
+@onready var wind_btn = %WindButton
+
 var player_hp = 100
 var enemy_hp = 50
 var player_sprite: Sprite2D
 var enemy_sprite: Sprite2D
+
 enum State { PLAYER_TURN, ENEMY_TURN, BUSY, WON, LOST }
 var current_state = State.PLAYER_TURN
 
 func _ready():
 	hide()
-	# Connect all three buttons here so nothing gets missed
+	# Connect Main Buttons
 	attack_button.pressed.connect(_on_attack_pressed)
-	skill_button.pressed.connect(_on_skill_pressed)
+	skill_button.pressed.connect(_on_skill_menu_opened)
 	run_button.pressed.connect(_on_run_pressed)
+	
+	# Connect Elemental Buttons
+	fire_btn.pressed.connect(func(): _use_skill("Fire", 40, Color.ORANGE_RED))
+	water_btn.pressed.connect(func(): _use_skill("Water", 30, Color.AQUA))
+	earth_btn.pressed.connect(func(): _use_skill("Earth", 50, Color.SADDLE_BROWN))
+	wind_btn.pressed.connect(func(): _use_skill("Wind", 25, Color.PALE_TURQUOISE))
 
+func _use_skill(skill_name: String, damage: int, effect_color: Color):
+	current_state = State.BUSY
+	skill_box.hide()
+	
+	print("Using ", skill_name, "!")
+	
+	# Snappy Persona-style flash effect
+	var flash = create_tween()
+	flash.tween_property(enemy_sprite, "modulate", effect_color, 0.1)
+	flash.tween_property(enemy_sprite, "modulate", Color.WHITE, 0.1)
+	
+	# Attack Lunge
+	var lunge = create_tween()
+	lunge.tween_property(player_sprite, "position", enemy_sprite.position, 0.15)
+	lunge.tween_property(player_sprite, "position", player_marker.position, 0.15)
+	
+	await lunge.finished
+	
+	enemy_hp -= damage
+	enemy_hp_bar.value = enemy_hp
+	
+	if enemy_hp <= 0:
+		_end_battle(true)
+	else:
+		current_state = State.ENEMY_TURN
+		_enemy_turn()
+		
+func _on_skill_menu_opened():
+	if current_state != State.PLAYER_TURN: return
+	action_menu.hide()
+	skill_box.show()
+	fire_btn.grab_focus() # Good for controller/keyboard support
+
+func _input(event):
+	# Allow backing out of the skill menu with "ui_cancel" (Escape/B button)
+	if event.is_action_pressed("ui_cancel") and skill_box.visible:
+		skill_box.hide()
+		action_menu.show()
+		skill_button.grab_focus()
+		
 func start_battle(enemy_node):
 	show()
 	player_hp = 100
