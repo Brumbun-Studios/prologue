@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://level003_cave001"]
+
+[ext_resource type="PackedScene" uid="uid://bkcjegedfadci" path="res://Scenes/level_001.tscn" id="1_lv003"]
+[ext_resource type="PackedScene" uid="uid://dasso4sqxmpup" path="res://Scenes/badboyslime.tscn" id="2_lv003"]
+[ext_resource type="PackedScene" uid="uid://cxduu5km4nji6" path="res://Scenes/slime.tscn" id="3_lv003"]
+[ext_resource type="Script" path="res://scripts/ZoneTransition.gd" id="4_lv003"]
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(24, 24)
+
+[node name="level_003" type="Node2D"]
+
+[node name="Tilemap" parent="." instance=ExtResource("1_lv003")]
+
+[node name="SlimeFriend" parent="." instance=ExtResource("3_lv003")]
+position = Vector2(30, 50)
+
+[node name="badSlime" parent="." instance=ExtResource("2_lv003")]
+position = Vector2(-50, -30)
+
+[node name="badSlime2" parent="." instance=ExtResource("2_lv003")]
+position = Vector2(80, 10)
+
+[node name="badSlime3" parent="." instance=ExtResource("2_lv003")]
+position = Vector2(-20, 70)
+
+[node name="CaveEntrance" type="Marker2D" parent="."]
+position = Vector2(0, 80)
+
+[node name="CaveExit" type="Area2D" parent="."]
+position = Vector2(0, 90)
+script = ExtResource("4_lv003")
+target_scene = "res://Scenes/level_001_with_cave.tscn"
+spawn_point_name = "CaveReturn"
+prompt_text = "[ E ] Exit Cave"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveExit"]
+shape = SubResource("Shape_exit")

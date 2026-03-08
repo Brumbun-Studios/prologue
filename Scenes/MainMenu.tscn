@@ -1,46 +1,100 @@
-[gd_scene format=3 uid="uid://ctxn7s26vs76a"]
+[gd_scene load_steps=6 format=3 uid="uid://ctxn7s26vs76a"]
 
 [ext_resource type="Script" uid="uid://ccib7viu2qe3v" path="res://scripts/MainMenu.gd" id="1_853f1"]
-[ext_resource type="Texture2D" uid="uid://7onsnfqob538" path="res://assets/Water_Middle.png" id="1_tt5f1"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_853f1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.051, 0.2392, 0.2275, 1)
 
-[node name="MainMenu" type="CanvasLayer" unique_id=60105635]
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 32
+font_color = Color(0.9569, 0.8549, 0.749, 1)
+outline_size = 6
+outline_color = Color(0.4235, 0.0902, 0.1176, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.4235, 0.0902, 0.1176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.051, 0.2392, 0.2275, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.9569, 0.8549, 0.749, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.4235, 0.0902, 0.1176, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Theme" id="Theme_rustic"]
+Button/colors/font_color = Color(0.9569, 0.8549, 0.749, 1)
+Button/colors/font_focus_color = Color(0.4235, 0.0902, 0.1176, 1)
+Button/colors/font_hover_color = Color(0.4235, 0.0902, 0.1176, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_btn_hover")
+Button/styles/hover = SubResource("StyleBoxFlat_btn_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_btn_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_btn_normal")
+
+[node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_853f1")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=621862218]
-offset_right = 639.0
-offset_bottom = 360.0
-texture = ExtResource("1_tt5f1")
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
-[node name="Label" type="Label" parent="." unique_id=1226175786]
-offset_left = 63.0
-offset_top = 65.0
-offset_right = 199.0
-offset_bottom = 97.0
-text = "Unnamed Game"
-label_settings = SubResource("LabelSettings_853f1")
-text_direction = 1
+[node name="TitleLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -80.0
+offset_right = 140.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "The Rustic Woods"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=809850817]
-anchors_preset = -1
-anchor_left = 0.102000006
-anchor_top = 0.333
-anchor_right = 0.32200003
-anchor_bottom = 0.586
-offset_left = -0.2800064
-offset_top = 0.11999512
-offset_right = -0.08001709
-offset_bottom = 0.039993286
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 10.0
+offset_right = 60.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rustic")
+theme_override_constants/separation = 12
 
-[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=1417503726]
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play
-"
+text = "Play"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=2095129223]
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Exit
-"
+text = "Exit"

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://gameover_screen_001"]
+
+[ext_resource type="Script" path="res://scripts/GameOver.gd" id="1_go001"]
+
+[node name="GameOverScreen" type="CanvasLayer" unique_id=222222001]
+script = ExtResource("1_go001")
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=222222002]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.15, 0.02, 0.02, 0.92)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=222222003]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=222222004]
+layout_mode = 2
+text = "💀 GAME OVER 💀"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="VBoxContainer" unique_id=222222005]
+layout_mode = 2
+text = "You were defeated..."
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="VBoxContainer" unique_id=222222006]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Try Again"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=222222007]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"

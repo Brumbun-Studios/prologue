@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://level001cave_v2"]
+
+[ext_resource type="PackedScene" uid="uid://bkcjegedfadci" path="res://Scenes/level_001.tscn" id="1_l1c"]
+[ext_resource type="PackedScene" uid="uid://b1hexjrxd0oym" path="res://Scenes/npc.tscn" id="2_l1c"]
+[ext_resource type="PackedScene" uid="uid://cxduu5km4nji6" path="res://Scenes/slime.tscn" id="3_l1c"]
+[ext_resource type="PackedScene" uid="uid://dasso4sqxmpup" path="res://Scenes/badboyslime.tscn" id="4_l1c"]
+[ext_resource type="Script" path="res://scripts/ZoneTransition.gd" id="5_l1c"]
+
+[sub_resource type="RectangleShape2D" id="Shape_cave"]
+size = Vector2(24, 32)
+
+[node name="level_001_with_cave" type="Node2D"]
+
+[node name="Tilemap" parent="." instance=ExtResource("1_l1c")]
+
+[node name="NPC" parent="." instance=ExtResource("2_l1c")]
+position = Vector2(-19, 75)
+
+[node name="NPC2" parent="." instance=ExtResource("2_l1c")]
+position = Vector2(132, 9)
+
+[node name="Slime" parent="." instance=ExtResource("3_l1c")]
+position = Vector2(132, 80)
+
+[node name="badSlime" parent="." instance=ExtResource("4_l1c")]
+position = Vector2(-78, 18)
+
+[node name="CaveReturn" type="Marker2D" parent="."]
+position = Vector2(-120, -55)
+
+[node name="CaveEntrance" type="Area2D" parent="."]
+position = Vector2(-120, -75)
+script = ExtResource("5_l1c")
+target_scene = "res://Scenes/level_003.tscn"
+spawn_point_name = "CaveEntrance"
+prompt_text = "[ E ] Enter Cave"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveEntrance"]
+shape = SubResource("Shape_cave")
+
+[node name="SignLabel" type="Label" parent="CaveEntrance"]
+position = Vector2(-32, -24)
+text = "🪨 Cave"
+theme_override_font_sizes/font_size = 11

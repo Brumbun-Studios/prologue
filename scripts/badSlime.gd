@@ -5,18 +5,23 @@ func interact():
 	if not ui: return
 
 	ui.start_conversation(
-		"Bad Slime", 
-		"*gurgle* ... You look delicious. Prepare to be absorbed!", 
+		"Bad Slime",
+		"*gurgle* ...You look delicious. Prepare to be absorbed!",
 		["Wait, no!", "Bring it on!"]
 	)
-	
-	var choice = await ui.choice_selected  # 0 = "Wait, no!", 1 = "Bring it on!"
-	
+
+	var choice = await ui.choice_selected  # 0 = flee, 1 = fight
+
+	# Instantly hide the dialogue box
 	ui.hide()
-	ui.dialogue_finished.emit()  # Manually emit so playerScript unlocks is_talking
-	
-	if choice == 1:  # "Bring it on!"
+
+	if choice == 1:
+		# Player chose to fight — hand off to Main.
+		# CRITICAL FIX: We do NOT emit dialogue_finished here. 
+		# This keeps the player "locked" so they can't accidentally interact twice!
 		var main = get_tree().root.get_node("Main")
-		main.enter_battle(self)
-	else:  # "Wait, no!" — just walk away, no battle
-		pass
+		if main:
+			main.enter_battle(self)
+	else:
+		# Player backed down, so it's safe to unblock them.
+		ui.dialogue_finished.emit()

@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://dechadqogkjm8"]
+
+[ext_resource type="Script" uid="uid://dvh3ue3c2uhaj" path="res://scripts/OverworldUI.gd" id="1_oui"]
+[ext_resource type="Texture2D" uid="uid://c4odii2dh1jyg" path="res://assets/Player.png" id="2_player"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_Frame"]
+bg_color = Color(0.051, 0.2392, 0.2275, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4235, 0.0902, 0.1176, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_Portrait"]
+atlas = ExtResource("2_player")
+region = Rect2(8.511818, 3.881454, 14.363518, 15.451664)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_BarBg"]
+bg_color = Color(0.051, 0.2392, 0.2275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4235, 0.0902, 0.1176, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_HPFill"]
+bg_color = Color(0.4235, 0.0902, 0.1176, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_MPFill"]
+bg_color = Color(0.9569, 0.8549, 0.749, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="OverworldUI" type="CanvasLayer" unique_id=185449661]
+script = ExtResource("1_oui")
+
+[node name="PlayerStats" type="Panel" parent="." unique_id=794392619]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -65.0
+offset_right = 185.0
+offset_bottom = -15.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_Frame")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerStats" unique_id=1670891168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PortraitRect" type="TextureRect" parent="PlayerStats/HBoxContainer" unique_id=508428847]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = SubResource("AtlasTexture_Portrait")
+stretch_mode = 5
+
+[node name="Bars" type="VBoxContainer" parent="PlayerStats/HBoxContainer" unique_id=1107312786]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="PlayerStats/HBoxContainer/Bars" unique_id=1315544153]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_BarBg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_HPFill")
+value = 100.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="PlayerStats/HBoxContainer/Bars/HPBar" unique_id=24484084]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9569, 0.8549, 0.749, 1)
+theme_override_font_sizes/font_size = 10
+text = "HP 100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MPBar" type="ProgressBar" parent="PlayerStats/HBoxContainer/Bars" unique_id=1682458188]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_BarBg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_MPFill")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="MPLabel" type="Label" parent="PlayerStats/HBoxContainer/Bars/MPBar" unique_id=1723273806]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.051, 0.2392, 0.2275, 1)
+theme_override_font_sizes/font_size = 10
+text = "MP 50/50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryPanel" type="Panel" parent="." unique_id=1288517778]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -65.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_Frame")
+
+[node name="VBox" type="VBoxContainer" parent="InventoryPanel" unique_id=820395690]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="FullGrid" type="GridContainer" parent="InventoryPanel/VBox" unique_id=1844870387]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="HotbarContainer" type="HBoxContainer" parent="InventoryPanel/VBox" unique_id=1304628736]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+alignment = 1

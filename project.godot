@@ -18,6 +18,10 @@ config/name="prologue"
 run/main_scene="uid://cd7pm1b53a1g6"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[autoload]
+
+PlayerManager="*uid://c804qcs87xsoq"
+
 [display]
 
 window/size/viewport_width=640
