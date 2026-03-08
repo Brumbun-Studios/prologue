@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://level002_custom"]
+
+[ext_resource type="PackedScene" uid="uid://bkcjegedfadci" path="res://Scenes/level_001.tscn" id="1_lv002"]
+[ext_resource type="PackedScene" uid="uid://dasso4sqxmpup" path="res://Scenes/badboyslime.tscn" id="2_lv002"]
+[ext_resource type="PackedScene" uid="uid://cxduu5km4nji6" path="res://Scenes/slime.tscn" id="3_lv002"]
+[ext_resource type="PackedScene" uid="uid://b1hexjrxd0oym" path="res://Scenes/npc.tscn" id="4_lv002"]
+
+[node name="level_002" type="Node2D"]
+
+[node name="Tilemap" parent="." instance=ExtResource("1_lv002")]
+
+[node name="NPC" parent="." instance=ExtResource("4_lv002")]
+position = Vector2(-19, 75)
+
+[node name="Slime" parent="." instance=ExtResource("3_lv002")]
+position = Vector2(50, 90)
+
+[node name="badSlime" parent="." instance=ExtResource("2_lv002")]
+position = Vector2(-78, 18)
+
+[node name="badSlime2" parent="." instance=ExtResource("2_lv002")]
+position = Vector2(120, -40)
